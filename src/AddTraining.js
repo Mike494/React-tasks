@@ -1,7 +1,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 
-class AddCustomer extends React.Component {
+class AddTraining extends React.Component {
   constructor(props) {
       super(props);
       this.state = {firstname: '', lastname: '',  streetaddress: '', postcode: '', city: '', email: '', phone: ''};
@@ -13,18 +13,18 @@ class AddCustomer extends React.Component {
       );
   }    
   
-  // Save customers and load customers and finally close modal
+  // Save Training and load Training and finally close modal
   handleSubmit = (event) => {
       event.preventDefault();
-      var newCustomer = {firstname: this.state.firstname, lastname: this.state.lastname, streetaddress: this.state.streetaddress, postcode: this.state.postcode, city: this.state.city};
-      this.props.AddCustomer(newCustomer);    
-      this.props.loadCustomer();
+      var newTraining = {firstname: this.state.firstname, lastname: this.state.lastname, streetaddress: this.state.streetaddress, postcode: this.state.postcode, city: this.state.city};
+      this.props.AddTraining(newTraining);    
+      this.props.loadTraining();
       this.refs.simpleDialog.hide();    
   }
   
   render() {
-    // Add customers page doesn't fit to default size modal
-    const addCustomerDialog = {
+    // Add Training page doesn't fit to default size modal
+    const addTrainingDialog = {
       width: '70%',
       height: '450px',
       marginTop: '-300px',
@@ -33,10 +33,10 @@ class AddCustomer extends React.Component {
 
     return (
       <div>
-        <SkyLight dialogStyles={addCustomerDialog} hideOnOverlayClicked ref="simpleDialog">
+        <SkyLight dialogStyles={addTrainingDialog} hideOnOverlayClicked ref="simpleDialog">
               <div className="card" style={{"width": "95%"}}>
               <div className="card-body">
-              <h5 className="card-title">New customers</h5>
+              <h5 className="card-title">New Training</h5>
               <form>
                   <div className="form-group">
                       <input type="text" placeholder="firstname" className="form-control" name="firstname" onChange={this.handleChange}/>    
@@ -62,11 +62,11 @@ class AddCustomer extends React.Component {
               </div>
         </SkyLight>
         <div className="col-md-2">
-            <button style={{'margin': '10px'}} className="btn btn-primary" onClick={() => this.refs.simpleDialog.show()}>New customers</button>
+            <button style={{'margin': '10px'}} className="btn btn-primary" onClick={() => this.refs.simpleDialog.show()}>New Trainings</button>
         </div>
       </div>   
     );
   }
 }
 
-export default AddCustomer;
+export default AddTraining;

@@ -5,28 +5,28 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css' 
 import { ToastContainer, toast } from 'react-toastify';
 import {CSVLink, CSVDownload} from 'react-csv';
-import AddCustomer from './AddCustomer';
+import AddTraining from './AddTraining';
 
 
-class Customerlist extends Component {
-  state = { customers: [] };
+class Traininglist extends Component {
+  state = { trainings: [] };
 
   componentDidMount() {
-    this.loadCustomers();
+    this.loadTrainings();
   }
   
-  // Load customers from REST API
-  loadCustomers = () => {
-    fetch('https://customerrest.herokuapp.com/api/customers')
+  // Load Training from REST API
+  loadTrainings = () => {
+    fetch('https://customerrest.herokuapp.com/api/trainings')
     .then((response) => response.json()) 
     .then((responseData) => { 
       this.setState({ 
-        customers: responseData.content,
+        trainings: responseData.content,
       }); 
     })   
   }
 
-  // Delete customers
+  // Delete Training
   onDelClick = (idLink) => {
     confirmAlert({
       title: '',
@@ -35,7 +35,7 @@ class Customerlist extends Component {
       cancelLabel: 'CANCEL',                            
       onConfirm: () => {
         fetch(idLink, {method: 'DELETE'})
-        .then(res => this.loadCustomers())
+        .then(res => this.loadTrainings())
         .catch(err => console.error(err)) 
 
         toast.success("Delete succeed", {
@@ -45,27 +45,27 @@ class Customerlist extends Component {
     })   
   }
 
-  // Create new customers
-  AddCustomer(customers) {
-    fetch('https://customerrest.herokuapp.com/api/customers', 
+  // Create new Training
+  AddTraining(trainings) {
+    fetch('https://customerrest.herokuapp.com/api/trainings', 
     {   method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(customers)
+        body: JSON.stringify(trainings)
     })
-    .then(res => this.loadCustomers())
+    .then(res => this.loadTrainings())
     .catch(err => console.error(err))
   }
 
-    // Update customers
-  updateCustomer(customers, link) {
+    // Update Training
+  updateTraining(trainings, link) {
     fetch(link, 
     { method: 'PUT', 
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(customers)
+      body: JSON.stringify(trainings)
     })
     .then(
       toast.success("Changes saved", {
@@ -82,12 +82,12 @@ class Customerlist extends Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.state.customers];
+          const data = [...this.state.trainings];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ customers: data });
+          this.setState({ trainings: data });
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.customers[cellInfo.index][cellInfo.column.id]
+          __html: this.state.trainings[cellInfo.index][cellInfo.column.id]
         }}                
       />
     );
@@ -97,10 +97,10 @@ class Customerlist extends Component {
     return (
       <div className="App-body">
       <div className="row">
-        <AddCustomer AddCustomer={this.AddCustomer} loadCustomers={this.loadCustomers} />
-        <CSVLink style={{padding: 20}} data={this.state.customers}>Download CSV</CSVLink>
+        <AddTraining AddTraining={this.AddTraining} loadTrainings={this.loadTrainings} />
+        <CSVLink style={{padding: 20}} data={this.state.trainings}>Download CSV</CSVLink>
         </div>
-        <ReactTable data={this.state.customers}
+        <ReactTable data={this.state.trainings}
         columns={[
             {
               columns: [
@@ -144,7 +144,7 @@ class Customerlist extends Component {
                   filterable: false,
                   width: 100,
                   accessor: '_links.self.href',
-                  Cell: ({value, row}) => (<button className="btn btn-default btn-link" onClick={()=>{this.updateCustomer(row, value)}}>Save</button>)
+                  Cell: ({value, row}) => (<button className="btn btn-default btn-link" onClick={()=>{this.updateTraining(row, value)}}>Save</button>)
                 },              
                 {
                   id: 'button',
@@ -166,4 +166,4 @@ class Customerlist extends Component {
   }
 }
 
-export default Customerlist;
+export default Traininglist;
