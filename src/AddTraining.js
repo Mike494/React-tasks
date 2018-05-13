@@ -4,7 +4,7 @@ import SkyLight from 'react-skylight';
 class AddTraining extends React.Component {
   constructor(props) {
       super(props);
-      this.state = {firstname: '', lastname: '',  streetaddress: '', postcode: '', city: '', email: '', phone: ''};
+      this.state = {date: '', duration: '',  activity: ''};
   }
 
   handleChange = (event) => {
@@ -16,7 +16,7 @@ class AddTraining extends React.Component {
   // Save Training and load Training and finally close modal
   handleSubmit = (event) => {
       event.preventDefault();
-      var newTraining = {firstname: this.state.firstname, lastname: this.state.lastname, streetaddress: this.state.streetaddress, postcode: this.state.postcode, city: this.state.city};
+      var newTraining = {data: this.state.date, duration: this.state.duration, activity: this.state.activity};
       this.props.AddTraining(newTraining);    
       this.props.loadTraining();
       this.refs.simpleDialog.hide();    
@@ -39,19 +39,13 @@ class AddTraining extends React.Component {
               <h5 className="card-title">New Training</h5>
               <form>
                   <div className="form-group">
-                      <input type="text" placeholder="firstname" className="form-control" name="firstname" onChange={this.handleChange}/>    
+                      <input type="text" placeholder="date" className="form-control" name="date" onChange={this.handleChange}/>    
                   </div>
                   <div className="form-group">       
-                      <input type="text" placeholder="lastname" className="form-control" name="lastname" onChange={this.handleChange}/>
+                      <input type="text" placeholder="duration" className="form-control" name="duration" onChange={this.handleChange}/>
                   </div>
                   <div className="form-group">
-                      <input type="text" placeholder="streetaddress" className="form-control" name="streetaddress" onChange={this.handleChange}/>
-                  </div>
-                  <div className="form-group">
-                      <input type="text" placeholder="postcode" className="form-control" name="postcode" onChange={this.handleChange}/>
-                  </div>
-                  <div className="form-group">
-                      <input type="text" placeholder="city" className="form-control" name="city" onChange={this.handleChange}/>
+                      <input type="text" placeholder="activity" className="form-control" name="activity" onChange={this.handleChange}/>
                   </div>
 
                   <div className="form-group">

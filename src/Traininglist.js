@@ -109,51 +109,20 @@ class Traininglist extends Component {
                   show: false
                 },
                 {
-                  Header: "Firstname",
-                  accessor: "firstname",
+                  Header: "Date",
+                  accessor: "date",
                   Cell: this.renderEditable
                 },
                 {
-                  Header: "Lastname",
-                  accessor: "lastname",
+                  Header: "Duration",
+                  accessor: "duration",
                   Cell: this.renderEditable
                 },
                 {
-                  Header: "Streetaddress",
-                  accessor: "streetaddress",
+                  Header: "Activity",
+                  accessor: "activity",
                   Cell: this.renderEditable
-                },
-                {
-                  Header: "Postcode",
-                  accessor: "postcode",
-                  Cell: this.renderEditable
-                },
-                {
-                  Header: "City",
-                  accessor: "city",
-                  Cell: this.renderEditable
-                },
-                {
-                  Header: "Email",
-                  accessor: "email",
-                  Cell: this.renderEditable
-                },
-                {
-                  id: 'button',
-                  sortable: false,
-                  filterable: false,
-                  width: 100,
-                  accessor: '_links.self.href',
-                  Cell: ({value, row}) => (<button className="btn btn-default btn-link" onClick={()=>{this.updateTraining(row, value)}}>Save</button>)
-                },              
-                {
-                  id: 'button',
-                  sortable: false,
-                  filterable: false,
-                  width: 100,
-                  accessor: '_links.self.href',
-                  Cell: ({value, row}) => (<button className="btn btn-default btn-link" onClick={()=>{this.onDelClick(row, value)}}>Delete</button>)
-                }              
+                }                  
               ]
             }
           ]}
